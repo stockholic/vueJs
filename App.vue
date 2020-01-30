@@ -54,9 +54,11 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="indigo" app height="30">
-      <span class="white--text">&copy; 2019</span>
+
+    <v-footer app height="30" class="grey lighten-4">
+      <span color="grey darken-3">&copy; 2019</span>
     </v-footer>
+    
   </v-app>
 </template>
 
