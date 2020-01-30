@@ -1,24 +1,36 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list dense>
-        <v-list-item link router :to="{name:'home'}">
-          <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
+
+    <v-navigation-drawer permanent app v-model="drawer">
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            Application
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            subtext
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense nav >
+        <v-list-item 
+            v-for="(link, i) in links" 
+            :key="i" 
+            exact
+            :to="{name : link.name}"
+          >
+          <v-list-item-icon>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link router :to="{name:'board-list'}">
-          <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Board</v-list-item-title>
+            <v-list-item-title>{{ link.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
     </v-navigation-drawer>
 
     <v-app-bar app color="indigo" dark>
@@ -37,11 +49,14 @@
 
 <script>
 export default {
-  props: {
-    source: String
-  },
-  data: () => ({
-    drawer: null
-  })
+  data() {
+      return {
+        drawer: null,
+        links: [
+          { title: 'Dashboard', path: '/',name:'home', icon: 'mdi-view-dashboard' }
+         ,{ title: 'Board', path: '/board', name:'board', icon: 'mdi-image' }
+        ],
+      }
+    },
 };
 </script>
