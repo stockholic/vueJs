@@ -1,6 +1,6 @@
   <template>
     <v-container>
-      <h1>List</h1>
+      <h1>List {{ page }} {{ seqNo }}</h1>
 
       <p v-for="(lst, idx) in dataList" :key="idx" @click="goPage(lst.seqNo)" style="cursor:pointer">{{ lst.title }}</p>
       <p>page :  {{ getPage }}</p>
@@ -30,14 +30,19 @@
 import { mapState, mapGetters } from 'vuex';
 
   export default {
+
+    props : ['page', 'seqNo'],
+
     data() {
       return {
         dataList : [
-          {seqNo : 123, title : "가나다라 마바사 1" }
-          ,{seqNo : 125, title : "가나다라 마바사 2" }
-          ,{seqNo : 135, title : "가나다라 마바사 3" }
-        ]
+          {seqNo : 111, title : "가나다라 마바사 1" }
+          ,{seqNo : 222, title : "가나다라 마바사 2" }
+          ,{seqNo : 333, title : "가나다라 마바사 3" }
+        ],
+       
       }
+      
     },
 
 /**
@@ -62,6 +67,7 @@ import { mapState, mapGetters } from 'vuex';
           ...mapState(['users'])
       },
       methods: {
+/* 
         goPage(seqNo){
         this.$router.push({ 
             name : 'board-view',
@@ -71,6 +77,12 @@ import { mapState, mapGetters } from 'vuex';
             }
           })
         },
+ */
+        
+        goPage(seqNo){
+          this.$emit('goView', seqNo)
+        },
+        
 
       createUser(){
         let obj = {userId: "merong5", passwd : "1234", name : "메렁 5" }
